@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Soblox Revival</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+    background: #2c3e50; /* Dark background */
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background-color: #2c3e50;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+  header svg {
+    margin-right: 12px;
+    user-select: none;
+  }
+  nav {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+  }
+  nav a, nav button {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  nav a:hover, nav button:hover,
+  nav a.active {
+    background-color: #e63946; /* Red accent on hover/active */
+    color: white;
+  }
+  main {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  section {
+    display: none;
+  }
+  section.active {
+    display: block;
+  }
+
+  /* Settings Menu */
+  .settings-menu {
+    position: relative;
+    display: inline-block;
+  }
+  #settings-btn {
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  #settings-btn:hover {
+    background-color: #34495e;
+  }
+  #settings-dropdown {
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+    position: absolute;
+    right: 0;
+    background-color: #2c3e50;
+    border: 1px solid #34495e;
+    border-radius: 4px;
+    width: 180px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+  #settings-dropdown.hidden {
+    display: none;
+  }
+  #settings-dropdown li a {
+    display: block;
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+  }
+  #settings-dropdown li a:hover {
+    background-color: #34495e;
+  }
+
+  /* Login and Signup forms */
+  .auth-container {
+    max-width: 400px;
+    margin: 40px auto;
+    background-color: #34495e;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .auth-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 900;
+    color: #e63946;
+  }
+  .auth-container label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  .auth-container input {
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  .auth-container button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: #e63946;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  .auth-container button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+  .auth-toggle {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  .auth-toggle button {
+    background: none;
+    border: none;
+    color: #e63946;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+  }
+  .error-message {
+    color: #ff6666;
+    margin-top: 10px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <!-- SOBLOX white text logo -->
+  <svg width="220" height="48" viewBox="0 0 550 100" xmlns="http://www.w3.org/2000/svg" aria-label="Soblox Logo" role="img" >
+    <text x="50%" y="60%" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="70" fill="white" dominant-baseline="middle" style="user-select:none;">
+      SOBLOX
+    </text>
+  </svg>
+
+  <nav id="main-nav" style="display:none;">
+    <a href="#" data-page="home" class="active">Home</a>
+    <a href="#" data-page="games">Games</a>
+    <a href="#" data-page="catalog">Catalog</a>
+    <a href="#" data-page="develop">Develop</a>
+    <a href="#" data-page="profile">Profile</a>
+    <a href="#" data-page="friends">Friends</a>
+    <a href="#" data-page="users">Users</a>
+    <a href="#" data-page="avatar">Avatar</a>
+    <a href="#" data-page="messages">Messages</a>
+    <a href="#" data-page="groups">Groups</a>
+    <a href="#" data-page="trades">Trades</a>
+    <a href="#" data-page="library">Library</a>
+    <a href="#" data-page="downloads">Downloads</a>
+    <a href="#" data-page="forums">Forums</a>
+    <a href="#" data-page="discord">Discord</a>
+  </nav>
+
+  <div class="settings-menu" id="settings-menu" style="display:none;">
+    <button id="settings-btn" title="Settings" aria-haspopup="
